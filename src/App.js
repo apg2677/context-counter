@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef } from "react";
 
 const App = () => {
-  const [value, setValue] = useState("");
-  useEffect(() => {
-    console.log("New Val: ", value);
-  }, [value]);
   return (
     <div>
-      <input
-        type="text"
-        name="username"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
+      <TextInputWithFocusButton />
     </div>
   );
 };
 
 export default App;
+
+const TextInputWithFocusButton = () => {
+  const inputEl = useRef(null);
+  const onButtonClick = () => {
+    inputEl.current.focus();
+  };
+  return (
+    <>
+      <input ref={inputEl} type="text" />
+      <button onClick={onButtonClick}>Focus the input</button>
+    </>
+  );
+};
